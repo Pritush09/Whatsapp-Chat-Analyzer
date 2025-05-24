@@ -3,6 +3,8 @@ from urlextract import URLExtract
 from wordcloud import WordCloud
 import pandas as pd
 import emoji
+import os
+import matplotlib.font_manager as fm
 
 def fetch_stats(selected_user, df):
     if selected_user != "Overall":
@@ -109,3 +111,17 @@ def activity_heatmap(selected_user, df):
 
     heatmap = df.pivot_table(index='day_name', columns='period', values='message', aggfunc='count').fillna(0)
     return heatmap
+
+
+
+# Try to load an emoji-capable font
+def get_emoji_font():
+    if os.name == 'nt':
+        return fm.FontProperties(family='Segoe UI Emoji')  # Windows
+    else:
+        # Typical path on Linux for Noto Color Emoji (installed via packages.txt)
+        noto_paths = fm.findSystemFonts(fontpaths=None, fontext='ttf')
+        for path in noto_paths:
+            if 'NotoColorEmoji' in path:
+                return fm.FontProperties(fname=path)
+        return None

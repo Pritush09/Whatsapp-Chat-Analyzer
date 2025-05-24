@@ -1,5 +1,6 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import seaborn as sns
 from utils import PreprocessTxTFile, Helper
 
@@ -115,15 +116,44 @@ if uploaded_file is not None:
             
 
         # Emoji analysis
+        # st.title("Emoji Analysis")
+        # emoji_df = Helper.emoji_helper(selected_user, df)
+        # col1, col2 = st.columns(2)
+        # with col1:
+        #     st.dataframe(emoji_df)
+        # with col2:
+        #     if not emoji_df.empty:
+        #         fig, ax = plt.subplots()
+        #         ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct="%0.2f")
+        #         st.pyplot(fig)
+        #     else:
+        #         st.write("No emojis found.")
+        
         st.title("Emoji Analysis")
         emoji_df = Helper.emoji_helper(selected_user, df)
+
         col1, col2 = st.columns(2)
+
         with col1:
             st.dataframe(emoji_df)
+
         with col2:
             if not emoji_df.empty:
+                # Use emoji-compatible font from helper
+                emoji_font = Helper.get_emoji_font()
+
                 fig, ax = plt.subplots()
-                ax.pie(emoji_df[1].head(), labels=emoji_df[0].head(), autopct="%0.2f")
+                wedges, texts, autotexts = ax.pie(
+                    emoji_df[1].head(),
+                    labels=emoji_df[0].head(),
+                    autopct="%0.2f"
+                )
+
+                # Apply emoji font to pie labels and percentages
+                if emoji_font:
+                    for text in texts + autotexts:
+                        text.set_fontproperties(emoji_font)
+
                 st.pyplot(fig)
             else:
                 st.write("No emojis found.")
