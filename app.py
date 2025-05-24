@@ -149,7 +149,7 @@ if uploaded_file is not None:
                     autopct="%0.2f"
                 )
 
-                # Apply emoji font to pie labels and percentages
+                # Only set font if a valid one is found
                 if emoji_font:
                     for text in texts + autotexts:
                         text.set_fontproperties(emoji_font)
