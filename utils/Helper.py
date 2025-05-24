@@ -116,16 +116,10 @@ def activity_heatmap(selected_user, df):
 
 # Try to load an emoji-capable font
 def get_emoji_font():
-    if os.name == 'nt':
-        return fm.FontProperties(family='Segoe UI Emoji')  # Windows
-    else:
-        # For Linux (Streamlit Cloud or WSL)
-        for path in fm.findSystemFonts(fontpaths=None, fontext='ttf'):
-            if "NotoColorEmoji" in path and path.endswith(".ttf"):
-                try:
-                    # Test if the font is valid
-                    fm.FontProperties(fname=path).get_name()
-                    return fm.FontProperties(fname=path)
-                except Exception:
-                    continue
-        return None
+    preferred_fonts = ["Segoe UI Emoji", "Symbola", "DejaVu Sans"]  # fallback list
+    for font in preferred_fonts:
+        try:
+            return fm.FontProperties(family=font)
+        except Exception:
+            continue
+    return None
