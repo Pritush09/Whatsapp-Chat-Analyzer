@@ -43,11 +43,11 @@ A Streamlit‑based Python application for analyzing WhatsApp chat exports — g
 git clone https://github.com/Pritush09/Whatsapp-Chat-Analyzer.git
 cd Whatsapp-Chat-Analyzer
 ```
-2. Install dependencies
+### 2. Install dependencies
 ```
 pip install -r requirements.txt
 ```
-3. Run application
+### 3. Run application
 ```
 streamlit run app.py
 ```
@@ -56,7 +56,7 @@ The app will launch at:
 http://localhost:8501
 ```
 
-🚀 Usage
+### 🚀 Usage
 Export chat: From WhatsApp → More options → Export chat → Without media → Save .txt.
 
 Upload file: Use the Streamlit sidebar file uploader.
@@ -67,7 +67,7 @@ View insights: Explore statistics, timelines, heatmaps, word clouds, emoji/senti
 
 Download data: (If implemented) Export visualizations or summary tables.
 
-🗂️ Project Structure
+### 🗂️ Project Structure
 ```
 .
 ├── app.py             # Main Streamlit interface
@@ -78,7 +78,7 @@ Download data: (If implemented) Export visualizations or summary tables.
 └── README.md
 ```
 
-🛠️ Contributing
+### 🛠️ Contributing
 Contributions are welcome! Feel free to:
 
 🐞 Report bugs via issues
